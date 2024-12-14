@@ -6,9 +6,11 @@ pragma solidity ^0.8.28;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 
 // ERC20Capped itself inherits ERC20, so just inherit from it only
-contract JunkToken is ERC20Capped, ERC20Burnable {
+contract JunkToken is ERC20Capped, ERC20Burnable{
     address payable public owner;
     uint256 public blockReward;
     constructor(uint256 cap, uint256 reward) ERC20("JunkToken", "JNK") ERC20Capped(cap * (10 ** decimals())) {
@@ -69,5 +71,6 @@ function destroy() public onlyOwner {
 
     // Event for contract destruction
     event ContractDestroyed(address indexed owner);
+
 
 }
